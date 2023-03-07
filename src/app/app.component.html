@@ -131,53 +131,56 @@
     </div>
 
     <div class="row">
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-form-field style="text-align: center">
           <mat-select formControlName="textStart">
             <mat-option value="Se">Se</mat-option>
             <mat-option value="Caso">Caso</mat-option>
           </mat-select>
+          <mat-error *ngIf="textToCodeOutput.get('textStart')?.invalid">Um dos valores do select deve ser selecionado</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2  d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-radio-group formControlName="firstNegative">
           <mat-radio-button class="p-1" [value]="true">Adicionar negação</mat-radio-button>
           <mat-radio-button class="p-1" [value]="false">Retirar negação</mat-radio-button>
         </mat-radio-group>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center"
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
            *ngIf="textToCodeOutput.value.firstNegative === true">
         <mat-form-field style="text-align: center">
           <input class="form-control" disabled matInput placeholder="não">
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-form-field style="text-align: center">
           <input class="form-control" matInput type="text" placeholder="Condição base" formControlName="firstFreeInput">
+          <mat-error *ngIf="textToCodeOutput.get('firstFreeInput')?.invalid">Valor de input livre deve ser preenchido</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-radio-group formControlName="insertConnector" (click)="validateConnector()">
           <mat-radio-button class="p-1" [value]="true">Adicionar Conector</mat-radio-button>
           <mat-radio-button class="p-1" [value]="false">Remover Conector</mat-radio-button>
         </mat-radio-group>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center"
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
            *ngIf="textToCodeOutput.value.insertConnector === true">
         <mat-form-field style="text-align: center">
           <mat-select formControlName="textConnector">
             <mat-option value="e">e</mat-option>
             <mat-option value="ou">ou</mat-option>
           </mat-select>
+          <mat-error *ngIf="textToCodeOutput.get('textConnector')?.invalid">Um dos valores do select deve ser selecionado</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center"
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
            *ngIf="textToCodeOutput.value.insertConnector === true">
         <mat-radio-group formControlName="secondNegative">
           <mat-radio-button class="p-1" [value]="true">Adicionar negação</mat-radio-button>
@@ -185,59 +188,65 @@
         </mat-radio-group>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center"
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
            *ngIf="textToCodeOutput.value.secondNegative === true && textToCodeOutput.value.insertConnector === true">
         <mat-form-field style="text-align: center">
           <input class="form-control" disabled matInput placeholder="não">
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center"
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
            *ngIf="textToCodeOutput.value.insertConnector === true">
         <mat-form-field style="text-align: center">
           <input class="form-control" matInput type="text" placeholder="Condição adicional"
                  formControlName="secondFreeInput">
+          <mat-error *ngIf="textToCodeOutput.get('secondFreeInput')?.invalid">Valor de input livre deve ser preenchido</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-form-field style="text-align: center">
           <mat-select formControlName="textConsequence">
             <mat-option value="então">então</mat-option>
             <mat-option value="logo">logo</mat-option>
           </mat-select>
+          <mat-error *ngIf="textToCodeOutput.get('textConsequence')?.invalid">Um dos valores do select deve ser selecionado</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-radio-group formControlName="thirdNegative">
           <mat-radio-button class="p-1" [value]="true">Adicionar negação</mat-radio-button>
           <mat-radio-button class="p-1" [value]="false">Retirar negação</mat-radio-button>
         </mat-radio-group>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center"
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
            *ngIf="textToCodeOutput.value.thirdNegative === true">
         <mat-form-field style="text-align: center">
           <input class="form-control" disabled matInput placeholder="não">
         </mat-form-field>
       </div>
 
-      <div class="col selection-col p-2 d-flex align-items-center justify-content-center">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
         <mat-form-field style="text-align: center">
           <input class="form-control" placeholder="Resultado da condição" matInput type="text"
                  formControlName="thirdFreeInput">
+          <mat-error *ngIf="textToCodeOutput.get('thirdFreeInput')?.invalid">Valor de input livre deve ser preenchido</mat-error>
         </mat-form-field>
       </div>
 
     </div>
 
     <div class="row button-row">
-      <div class="col d-flex justify-content-center p-2">
-        <button type="submit" class="btn btn-sm btn-dark" mat-raised-button [disabled]="this.textToCodeOutput.invalid">
-          Gerar código
-        </button>
+      <div class="col d-flex justify-content-center p-3">
+        <div (click)="onGenerateCodeClick()">
+          <button type="submit" class="btn btn-sm btn-dark" mat-raised-button [disabled]="this.textToCodeOutput.invalid">
+            Gerar código
+          </button>
+        </div>
       </div>
+      <mat-error class="error-text-size" *ngIf="textToCodeOutput.invalid && this.clickedGenerateCode">Todos os valores obrigatórios devem ser preenchidos para poder clicar em Gerar Código.</mat-error>
     </div>
 
   </div>

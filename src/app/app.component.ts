@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {TooltipPosition} from "@angular/material/tooltip";
 
@@ -7,7 +7,7 @@ import {TooltipPosition} from "@angular/material/tooltip";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'portugif';
 
   firstConditionTranslatedCode: string = '';
@@ -36,7 +36,15 @@ export class AppComponent {
 
   showTooltipOnClick = new FormControl(false);
 
+  clickedGenerateCode = false;
+
   constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.textToCodeOutput.get('insertConnector')?.valueChanges.subscribe(value => {
+      this.validateConnector();
+    })
+  }
 
   validateConnector() {
     if (this.textToCodeOutput.get('insertConnector')?.value) {
@@ -59,6 +67,10 @@ export class AppComponent {
     } else {
       this.hideDelay.enable();
     }
+  }
+
+  onGenerateCodeClick() {
+    this.clickedGenerateCode = true;
   }
 
   translateCode() {
