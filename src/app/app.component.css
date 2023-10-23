@@ -1,29 +1,5 @@
-.form-table {
-  max-width: 95vw;
-  min-height: 20vh;
-  border-collapse: separate;
-  border-spacing: 5px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-.header-col {
-  background-color: indianred;
+* {
+  font-family: 'Poppins', sans-serif;
 }
-
-.selection-col {
-  background-color: aquamarine;
-}
-
-.button-row {
-  background-color: cornsilk;
-}
-
-.mat-text {
-  font-size: 18px !important;
-}
-
-.error-text-size {
-  font-size: 10.5px !important;
-  display: flex;
-  justify-content: center;
-}
-

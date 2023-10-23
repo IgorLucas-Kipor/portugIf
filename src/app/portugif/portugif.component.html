@@ -1,0 +1,287 @@
+<mat-radio-group [formControl]="showTooltipOnClick" class="p-3" (change)="configureDelay()">
+  <span style="margin-right:3%;">Deseja ativar/desativar tooltip via clique? : </span>
+  <mat-radio-button class="p-2" [value]="true">Sim</mat-radio-button>
+  <mat-radio-button class="p-2" [value]="false">Não</mat-radio-button>
+</mat-radio-group>
+
+<br>
+
+<mat-form-field class="p-3">
+  <mat-select placeholder="Selecionar posição tooltips cabeçalho" [formControl]="position">
+    <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
+      {{positionOption}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+<mat-form-field class="p-3" style="text-align: center">
+  <input class="form-control" type="number" matInput
+         placeholder="Delay para ocultar tooltip (ms)"
+         [formControl]="hideDelay" [value]="hideDelay.value">
+</mat-form-field>
+
+<br><br>
+
+<form [formGroup]="textToCodeOutput" (submit)="translateCode()" class="pt-3 pb-3">
+
+  <br><br>
+
+  <div class="container form-table">
+    <div class="row border-3 d-flex justify-content-center">
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span matTooltip="O primeiro termo condicional da sua condição."
+              [matTooltipPosition]="position.value" #initialTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? initialTooltip.toggle() : null">Selecione um termo inicial</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span matTooltip="Selecione caso deseje negar a sua condição. Ex: Se não, caso não..."
+              [matTooltipPosition]="position.value" #firstNegationTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? firstNegationTooltip.toggle() : null">Adicionar ou remover primeira negação</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.firstNegative === true">
+        <span>Primeira negação</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span
+          matTooltip="Texto livre do que é a sua condição. Leve em consideração o termo inicial selecionado anteriormente!"
+          [matTooltipPosition]="position.value" #secondTextTooltip="matTooltip"
+          [matTooltipHideDelay]="hideDelay.value"
+          (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+          (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+          (click)="showTooltipOnClick.value ? secondTextTooltip.toggle() : null">Insira sua primeira condição</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span matTooltip="Selecione caso deseje adicionar um conector ao seu texto."
+              [matTooltipPosition]="position.value" #connectorOptionTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? connectorOptionTooltip.toggle() : null">Deseja adicionar um conector?</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.insertConnector === true">
+        <span matTooltip="Selecione uma expressão que irá conectar a sua oração. Ex: Se não chover e..."
+              [matTooltipPosition]="position.value" #connectorTextTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? connectorTextTooltip.toggle() : null">Selecione um conector</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.insertConnector === true">
+        <span matTooltip="Selecione caso queira negar a expressão após o conector. Ex: Se não chover e não..."
+              [matTooltipPosition]="position.value" #connectorNegationTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? connectorNegationTooltip.toggle() : null">Adicionar ou remover segunda negação</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.secondNegative === true && textToCodeOutput.value.insertConnector === true">
+        <span>Segunda negação</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.insertConnector === true">
+        <span matTooltip="Texto livre da sua segunda condição."
+              [matTooltipPosition]="position.value" #secondConditionTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? secondConditionTooltip.toggle() : null">Insira sua segunda condição</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span
+          matTooltip="Selecione o termo que dá início a consequência, ou seja, ao resultado da condição ser alcançada. Ex: Se não chover e não for sexta então..."
+          [matTooltipPosition]="position.value" #consequenceTooltip="matTooltip"
+          [matTooltipHideDelay]="hideDelay.value"
+          (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+          (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+          (click)="showTooltipOnClick.value ? consequenceTooltip.toggle() : null">Selecione um termo de consequência</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span
+          matTooltip="Selecione caso queira negar a sua consequência. Ex: Se não chover e não for sexta então não..."
+          [matTooltipPosition]="position.value" #negateConsequenceTooltip="matTooltip"
+          [matTooltipHideDelay]="hideDelay.value"
+          (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+          (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+          (click)="showTooltipOnClick.value ? negateConsequenceTooltip.toggle() : null">Adicionar ou remover terceira negação</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.thirdNegative === true">
+        <span>Terceira negação</span>
+      </div>
+      <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span matTooltip="Texto livre da sua consequência."
+              [matTooltipPosition]="position.value" #consequenceTextTooltip="matTooltip"
+              [matTooltipHideDelay]="hideDelay.value"
+              (mouseenter)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (mouseleave)="showTooltipOnClick.value ? $event.stopImmediatePropagation() : null"
+              (click)="showTooltipOnClick.value ? consequenceTextTooltip.toggle() : null">Insira sua consequência</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-form-field style="text-align: center">
+          <mat-select formControlName="textStart">
+            <mat-option value="Se">Se</mat-option>
+            <mat-option value="Caso">Caso</mat-option>
+          </mat-select>
+          <mat-error *ngIf="textToCodeOutput.get('textStart')?.invalid">Um dos valores do select deve ser selecionado</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-radio-group formControlName="firstNegative">
+          <mat-radio-button class="p-1" [value]="true">Adicionar negação</mat-radio-button>
+          <mat-radio-button class="p-1" [value]="false">Retirar negação</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.firstNegative === true">
+        <mat-form-field style="text-align: center">
+          <input class="form-control" disabled matInput placeholder="não">
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-form-field style="text-align: center">
+          <input class="form-control" matInput type="text" placeholder="Condição base" formControlName="firstFreeInput">
+          <mat-error *ngIf="textToCodeOutput.get('firstFreeInput')?.invalid">Valor de input livre deve ser preenchido</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-radio-group formControlName="insertConnector" (click)="validateConnector()">
+          <mat-radio-button class="p-1" [value]="true">Adicionar Conector</mat-radio-button>
+          <mat-radio-button class="p-1" [value]="false">Remover Conector</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.insertConnector === true">
+        <mat-form-field style="text-align: center">
+          <mat-select formControlName="textConnector">
+            <mat-option value="e">e</mat-option>
+            <mat-option value="ou">ou</mat-option>
+          </mat-select>
+          <mat-error *ngIf="textToCodeOutput.get('textConnector')?.invalid">Um dos valores do select deve ser selecionado</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.insertConnector === true">
+        <mat-radio-group formControlName="secondNegative">
+          <mat-radio-button class="p-1" [value]="true">Adicionar negação</mat-radio-button>
+          <mat-radio-button class="p-1" [value]="false">Retirar negação</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.secondNegative === true && textToCodeOutput.value.insertConnector === true">
+        <mat-form-field style="text-align: center">
+          <input class="form-control" disabled matInput placeholder="não">
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.insertConnector === true">
+        <mat-form-field style="text-align: center">
+          <input class="form-control" matInput type="text" placeholder="Condição adicional"
+                 formControlName="secondFreeInput">
+          <mat-error *ngIf="textToCodeOutput.get('secondFreeInput')?.invalid">Valor de input livre deve ser preenchido</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-form-field style="text-align: center">
+          <mat-select formControlName="textConsequence">
+            <mat-option value="então">então</mat-option>
+            <mat-option value="logo">logo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="textToCodeOutput.get('textConsequence')?.invalid">Um dos valores do select deve ser selecionado</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-radio-group formControlName="thirdNegative">
+          <mat-radio-button class="p-1" [value]="true">Adicionar negação</mat-radio-button>
+          <mat-radio-button class="p-1" [value]="false">Retirar negação</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center"
+           *ngIf="textToCodeOutput.value.thirdNegative === true">
+        <mat-form-field style="text-align: center">
+          <input class="form-control" disabled matInput placeholder="não">
+        </mat-form-field>
+      </div>
+
+      <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+        <mat-form-field style="text-align: center">
+          <input class="form-control" placeholder="Resultado da condição" matInput type="text"
+                 formControlName="thirdFreeInput">
+          <mat-error *ngIf="textToCodeOutput.get('thirdFreeInput')?.invalid">Valor de input livre deve ser preenchido</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="row button-row">
+      <div class="col d-flex justify-content-center p-3">
+        <div (click)="onGenerateCodeClick()">
+          <button type="submit" class="btn btn-sm btn-dark" mat-raised-button [disabled]="this.textToCodeOutput.invalid">
+            Gerar código
+          </button>
+        </div>
+      </div>
+      <mat-error class="error-text-size" *ngIf="textToCodeOutput.invalid && this.clickedGenerateCode">Todos os valores obrigatórios devem ser preenchidos para poder clicar em Gerar Código.</mat-error>
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="p-2 d-flex justify-content-center">Código em Portugol:</div>
+      <div class="p-2 d-flex justify-content-center" *ngIf="this.generatedCode">
+        <span
+          [matTooltip]="'O início de sua condição é sempre marcado por um \'se\', de forma a demarcar que se está falando de uma condicional, algo que pode acontecer.'"
+          [matTooltipPosition]="'right'"
+          [matTooltipClass]="['m-5', 'mat-text']">
+        {{this.firstConditionTranslatedCode}}
+        </span>
+      </div>
+      <div class="p-2 d-flex justify-content-center"
+           *ngIf="this.generatedCode && this.textToCodeOutput.get('textConnector')?.value">
+        <span [matTooltip]="'A segunda parte da sua condição usa de um conector, \'e\' ou \'ou\', que serve não apenas para interligar as condições, mas também formar uma condição composta.' +
+       ' Caso \'e\' seja selecionado, a consequência será executada apenas caso ambas as condições sejam reais, enquanto no caso do \'ou\', apenas uma delas precisa ser real.'"
+              [matTooltipPosition]="'right'"
+              [matTooltipClass]="['m-5', 'mat-text']">
+          {{this.secondConditionTranslatedCode}}
+        </span>
+      </div>
+      <div class="p-2 d-flex justify-content-center" *ngIf="this.generatedCode">
+        <span [matTooltip]="this.generatedCode ? 'A sua consequência é o que ocorre caso a sua condição seja verdadeira, ou seja, caso o que você determinou como condição de fato aconteça. Aqui apenas imprimimos o texto do que deveria acontecer,' +
+       ' mas em um código real, cabe a você, como programador, codificar o que será feito caso a condição se realize..' : ''"
+              [matTooltipPosition]="'right'"
+              [matTooltipClass]="'m-5'">
+        {{this.printTranslatedCode}}
+        </span>
+      </div>
+      <div class="p-2 d-flex justify-content-center" *ngIf="this.generatedCode">{{this.finalString}}</div>
+    </div>
+  </div>
+</form>

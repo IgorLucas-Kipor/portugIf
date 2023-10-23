@@ -10,10 +10,25 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatTableModule} from "@angular/material/table";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from "@angular/material/button";
+import { HeaderComponent } from './header/header.component';
+import { MainComponent } from './main/main.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { PortugifComponent } from './portugif/portugif.component';
+import { FaqComponent } from './faq/faq.component';
+import {AppRoutingModule} from "./app-routing.module";
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    MainComponent,
+    NavbarComponent,
+    PortugifComponent,
+    FaqComponent,
+    HomeComponent,
+    FooterComponent
   ],
     imports: [
         BrowserModule,
@@ -26,7 +41,8 @@ import {MatButtonModule} from "@angular/material/button";
         ReactiveFormsModule,
         MatTableModule,
         MatTooltipModule,
-        MatButtonModule
+        MatButtonModule,
+        AppRoutingModule
     ],
   providers: [],
   bootstrap: [AppComponent]
