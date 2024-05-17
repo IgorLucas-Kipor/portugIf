@@ -1,0 +1,171 @@
+<div class="row">
+  <div class="text-center col-12">
+    <h1 class="display-4 versalete">Laço For</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <app-dropdown [dropdownTitle]="firstDropdownTitle" [dropdownContent]="firstDropdownContent"></app-dropdown>
+    </div>
+    <div class="col-3">
+      <app-dropdown [dropdownTitle]="secondDropdownTitle" [dropdownContent]="secondDropdownContent"></app-dropdown>
+    </div>
+    <div class="col-3">
+      <app-dropdown [dropdownTitle]="thirdDropdownTitle" [dropdownContent]="thirdDropdownContent"></app-dropdown>
+    </div>
+    <div class="col-3">
+      <app-dropdown [dropdownTitle]="fourthDropdownTitle" [dropdownContent]="fourthDropdownContent"></app-dropdown>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<div class="row">
+  <div class="text-center col-12">
+    <h1 class="display-4 versalete">Vamos criar nosso próprio For?</h1>
+  </div>
+
+  <br><br>
+
+  <form [formGroup]="this.createFor" (submit)="gerarFor()" class="pt-3 pb-3">
+
+    <br><br>
+
+    <div class="container form-table">
+      <div class="row border-3 d-flex justify-content-center">
+        <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span
+          matTooltip="Defina o nome do inicializador do For. Por padrão definimos esse nome como 'indice', mas você pode alterá-lo como preferir."
+          [matTooltipPosition]="'above'"
+          [matTooltipHideDelay]="2000">Nome do Inicializador</span>
+        </div>
+        <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+          <span
+            matTooltip="Defina o valor inicial do seu inicializador. Para fins de simplificação, defina um valor numérico inteiro para ela."
+            [matTooltipPosition]="'above'"
+            [matTooltipHideDelay]="2000">Valor do Inicializador</span>
+          </div>
+        <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span matTooltip="Defina a condição de parada do laço For."
+              [matTooltipPosition]="'above'"
+              [matTooltipHideDelay]="2000">Condição de parada do For</span>
+        </div>
+        <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+          <span matTooltip="Defina o valor associado a condição de parada do laço For. Tal como no inicializador, defina um valor numérico inteiro para isso."
+                [matTooltipPosition]="'above'"
+                [matTooltipHideDelay]="2000">Valor da condição de parada do For</span>
+          </div>
+          <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+            <span matTooltip="Defina se o valor do seu iniciliazador será incrementado ou decrementado a cada iteração do laço For."
+                  [matTooltipPosition]="'above'"
+                  [matTooltipHideDelay]="2000">Incrementar/Decrementar</span>
+            </div>
+        <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
+        <span
+          matTooltip="Defina o que é realizado a cada iteração do laço for. Como se trata de um exemplo, a ação será tratada como uma simples impressão."
+          [matTooltipPosition]="'above'"
+          [matTooltipHideDelay]="2000">Ação realizada pelo For</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+          <mat-form-field style="text-align: center">
+            <input class="form-control" matInput type="text" placeholder="Nome do Inicializador" [formControl]="inicializador">
+            <mat-error *ngIf="createFor.get('inicializador')?.invalid">Nome do inicializador é obrigatório.</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+          <mat-form-field style="text-align: center">
+            <input class="form-control" placeholder="Valor inicial do inicializador" matInput type="number"
+                   [formControl]="valorInicializador">
+            <mat-error *ngIf="createFor.get('valorInicializador')?.errors && createFor.get('valorInicializador')?.getError('required')">Valor inicial do inicializador é obrigatório.</mat-error>
+            <mat-error *ngIf="createFor.get('valorInicializador')?.errors && createFor.get('valorInicializador')?.getError('numeric')">
+              Valor do inicializador deve ser numérico.
+            </mat-error>
+            <mat-error *ngIf="createFor.get('valorInicializador')?.errors && createFor.get('valorInicializador')?.getError('noFor')">
+              O conjunto de valores definido não permite que o for ocorra.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+          <mat-form-field style="text-align: center">
+            <mat-select [formControl]="condicaoParada">
+              <mat-option value="menor">&lt; (menor) </mat-option>
+              <mat-option value="menorIgual">&lt;= (menor ou igual)</mat-option>
+              <mat-option value="igual">== (igual)</mat-option>
+              <mat-option value="diferente">!= (diferente)</mat-option>
+              <mat-option value="maior">&gt; (maior) </mat-option>
+              <mat-option value="maiorIgual">&gt;= (maior ou igual)</mat-option>
+            </mat-select>
+            <mat-error *ngIf="createFor.get('condicaoParada')?.errors && createFor.get('condicaoParada')?.getError('required')">Condição de parada deve ser definida</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+          <mat-form-field style="text-align: center">
+            <input class="form-control" placeholder="Valor da condição de parada" matInput type="number"
+                   [formControl]="condicaoParadaValor">
+            <mat-error *ngIf="createFor.get('condicaoParadaValor')?.errors && createFor.get('condicaoParadaValor')?.getError('required')">Valor da condição de parada é obrigatório</mat-error>
+            <mat-error *ngIf="createFor.get('condicaoParadaValor')?.errors && createFor.get('condicaoParadaValor')?.getError('numeric')">
+              Valor da condição de parada deve ser numérico.
+            </mat-error>
+            <mat-error *ngIf="createFor.get('condicaoParadaValor')?.errors && createFor.get('condicaoParadaValor')?.getError('noFor')">
+              O conjunto de valores definido não permite que o for ocorra.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+          <mat-radio-group [formControl]="acrescimoDecrescimo">
+            <mat-radio-button class="p-1" [value]="true">Incrementar</mat-radio-button>
+            <mat-radio-button class="p-1" [value]="false">Decrementar</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="createFor.get('acrescimoDecrescimo')?.touched && createFor.get('acrescimoDecrescimo')?.invalid && createFor.get('acrescimoDecrescimo')?.errors && createFor.get('acrescimoDecrescimo')?.getError('required')">Necessário definir se inicializador sofrerá acréscimo ou decréscimo a cada iteração do For</mat-error>
+        </div>
+
+        <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
+          <mat-form-field style="text-align: center">
+            <input class="form-control" placeholder="Ação realizada pelo For" matInput type="text"
+                   [formControl]="acao">
+            <mat-error *ngIf="createFor.get('acao')?.invalid">É obrigatório especificar a ação que o For realiza</mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row button-row">
+        <div class="col d-flex justify-content-center p-3">
+          <button type="submit" class="btn btn-sm btn-dark" mat-raised-button [disabled]="this.createFor.invalid">
+            Criar for
+          </button>
+        </div>
+        <mat-error class="error-text-size text-center" *ngIf="createFor.invalid && createFor.get('condition')?.touched && createFor.get('action')?.touched">Todos os valores obrigatórios devem ser
+          preenchidos para poder criar o laço for.
+        </mat-error>
+        <mat-error class="error-text-size text-center" *ngIf="this.createFor.invalid && this.createFor.errors && this.createFor.getError('loopInfinito')">O conjunto de valores definido cria um loop infinito no laço For.</mat-error>
+        <mat-error class="error-text-size text-center" *ngIf="this.createFor.invalid && this.createFor.errors && this.createFor.getError('forNuncaIniciado')">O conjunto de valores definido nunca inicia o for.</mat-error>
+      </div>
+    </div>
+  </form>
+</div>
+
+<br><br>
+
+<div class="row" *ngIf="createdFor">
+  <div class="row">
+    <div class="col d-flex justify-content-center p-3">
+      Abaixo segue o código em portugol do seu for gerado:
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-center p-3">
+    <pre>
+      <code [innerHTML]="createdFor"></code>
+    </pre>
+    </div>
+  </div>
+</div>
+

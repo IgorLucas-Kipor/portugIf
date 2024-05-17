@@ -3,3 +3,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.red-snackbar {
+  background-color: #a61212;
+  color: white;
+}
+
+.versalete {
+  font-variant: all-small-caps !important;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+}

@@ -18,6 +18,11 @@ import { FaqComponent } from './faq/faq.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { VariablesComponent } from './variables/variables.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { WhileComponent } from './while/while.component';
+import { ForComponent } from './for/for.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { FooterComponent } from './footer/footer.component';
     PortugifComponent,
     FaqComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    DropdownComponent,
+    VariablesComponent,
+    WhileComponent,
+    ForComponent,
+    ForComponent
   ],
     imports: [
         BrowserModule,
@@ -42,7 +52,8 @@ import { FooterComponent } from './footer/footer.component';
         MatTableModule,
         MatTooltipModule,
         MatButtonModule,
-        AppRoutingModule
+        AppRoutingModule,
+        MatSnackBarModule
     ],
   providers: [],
   bootstrap: [AppComponent]

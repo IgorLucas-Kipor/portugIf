@@ -1,0 +1,9 @@
+<details #dropdown class="custom-dropdown" (toggle)="toggleDropdown()">
+  <summary><strong>{{dropdownTitle}}</strong></summary>
+  <div #dropdownText>
+    <p>{{dropdownContent}}</p>
+  </div>
+</details>
+
+<!-- Adicione elementos abaixo do dropdown para verificar o comportamento responsivo -->
+<div #dropdownItem class="dropdown-item"></div>

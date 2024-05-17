@@ -256,32 +256,36 @@
   <div class="row">
     <div class="col-12">
       <div class="p-2 d-flex justify-content-center">Código em Portugol:</div>
-      <div class="p-2 d-flex justify-content-center" *ngIf="this.generatedCode">
+      <div class="d-flex justify-content-center" *ngIf="this.generatedCode">
         <span
           [matTooltip]="'O início de sua condição é sempre marcado por um \'se\', de forma a demarcar que se está falando de uma condicional, algo que pode acontecer.'"
           [matTooltipPosition]="'right'"
-          [matTooltipClass]="['m-5', 'mat-text']">
-        {{this.firstConditionTranslatedCode}}
+          [matTooltipClass]="['mat-text']">
+          <pre style="margin: 0; padding: 0;">
+            <code [innerHTML]="firstConditionTranslatedCode"></code>
+          </pre>
         </span>
       </div>
-      <div class="p-2 d-flex justify-content-center"
+      <div class="d-flex justify-content-center"
            *ngIf="this.generatedCode && this.textToCodeOutput.get('textConnector')?.value">
         <span [matTooltip]="'A segunda parte da sua condição usa de um conector, \'e\' ou \'ou\', que serve não apenas para interligar as condições, mas também formar uma condição composta.' +
        ' Caso \'e\' seja selecionado, a consequência será executada apenas caso ambas as condições sejam reais, enquanto no caso do \'ou\', apenas uma delas precisa ser real.'"
               [matTooltipPosition]="'right'"
-              [matTooltipClass]="['m-5', 'mat-text']">
-          {{this.secondConditionTranslatedCode}}
+              [matTooltipClass]="['mat-text']">
+          <pre style="margin: 0; padding: 0;">
+            <code [innerHTML]="secondConditionTranslatedCode"></code>
+          </pre>
         </span>
       </div>
-      <div class="p-2 d-flex justify-content-center" *ngIf="this.generatedCode">
+      <div class="d-flex justify-content-center" *ngIf="this.generatedCode">
         <span [matTooltip]="this.generatedCode ? 'A sua consequência é o que ocorre caso a sua condição seja verdadeira, ou seja, caso o que você determinou como condição de fato aconteça. Aqui apenas imprimimos o texto do que deveria acontecer,' +
        ' mas em um código real, cabe a você, como programador, codificar o que será feito caso a condição se realize..' : ''"
-              [matTooltipPosition]="'right'"
-              [matTooltipClass]="'m-5'">
-        {{this.printTranslatedCode}}
+              [matTooltipPosition]="'right'">
+          <pre style="margin: 0; padding: 0;">
+            <code [innerHTML]="printTranslatedCode"></code>
+          </pre>
         </span>
       </div>
-      <div class="p-2 d-flex justify-content-center" *ngIf="this.generatedCode">{{this.finalString}}</div>
     </div>
   </div>
 </form>
