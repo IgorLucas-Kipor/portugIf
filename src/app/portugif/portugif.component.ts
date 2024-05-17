@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {TooltipPosition} from "@angular/material/tooltip";
+import { TooltipConfigService } from '../services/tooltip-config.service';
 
 @Component({
   selector: 'app-portugif',
@@ -27,15 +28,18 @@ export class PortugifComponent implements OnInit {
   });
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
-  position = new FormControl(this.positionOptions[0]);
+  showTooltipOnClick: boolean = false;
+  hideDelay: number = 0;
+  position: TooltipPosition = "after";
 
-  hideDelay = new FormControl(0);
-
-  showTooltipOnClick = new FormControl(false);
 
   clickedGenerateCode = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private tooltipConfigService: TooltipConfigService) {
+    this.tooltipConfigService.showTooltipOnClick$.subscribe(value => this.showTooltipOnClick = value);
+    this.tooltipConfigService.hideDelay$.subscribe(value => this.hideDelay = value);
+    this.tooltipConfigService.position$.subscribe(value => this.position = value);
+  }
 
   ngOnInit() {
     this.textToCodeOutput.get('insertConnector')?.valueChanges.subscribe(value => {
@@ -54,15 +58,6 @@ export class PortugifComponent implements OnInit {
       this.textToCodeOutput.get('secondFreeInput')?.updateValueAndValidity();
       this.textToCodeOutput.get('textConnector')?.setValidators(null);
       this.textToCodeOutput.get('textConnector')?.updateValueAndValidity();
-    }
-  }
-
-  configureDelay() {
-    if (this.showTooltipOnClick.value) {
-      this.hideDelay.disable();
-      this.hideDelay.setValue(0);
-    } else {
-      this.hideDelay.enable();
     }
   }
 

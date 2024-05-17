@@ -32,3 +32,18 @@
   text-transform: uppercase;
   margin: 20px 0;
 }
+
+/* Estilos CSS para o componente principal ou layout global */
+.page-container {
+  position: relative;
+  height: 2vh;
+}
+
+/* Estilos CSS para o botão ou ícone de abertura/fechamento */
+button {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+

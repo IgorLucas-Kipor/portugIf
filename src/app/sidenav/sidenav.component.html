@@ -1,0 +1,30 @@
+<!-- sidenav.component.html -->
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" [opened]="isSidenavOpen">
+      <mat-radio-group [formControl]="showTooltipOnClick" class="p-3" (change)="configureDelay()">
+        <span style="margin-right:3%;">Deseja ativar/desativar tooltip via clique? : </span>
+        <mat-radio-button class="p-2" [value]="true">Sim</mat-radio-button>
+        <mat-radio-button class="p-2" [value]="false">Não</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <mat-form-field class="p-3">
+        <mat-select placeholder="Selecionar posição tooltips cabeçalho" [formControl]="position">
+          <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
+            {{positionOption}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="p-3" style="text-align: center">
+        <input class="form-control" type="number" matInput
+               placeholder="Delay para ocultar tooltip (ms)"
+               [formControl]="hideDelay" [value]="hideDelay.value">
+      </mat-form-field>
+      <br><br>
+      <button mat-button (click)="applySettings()">Aplicar Configurações</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

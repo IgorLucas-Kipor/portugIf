@@ -5,4 +5,16 @@
   <p>Uma ferramenta auxiliadora para o aprendizado de programação.</p>
 </div>
 
-<app-main></app-main>
+<!-- Seu componente principal ou qualquer outro componente que esteja presente em toda a página -->
+<div class="page-container">
+  <!-- Conteúdo da página -->
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+</div>
+
+<app-sidenav>
+  <app-main></app-main>
+</app-sidenav>
+
+

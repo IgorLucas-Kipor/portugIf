@@ -10,6 +10,8 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatTableModule} from "@angular/material/table";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from "@angular/material/button";
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -23,6 +25,9 @@ import { VariablesComponent } from './variables/variables.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { WhileComponent } from './while/while.component';
 import { ForComponent } from './for/for.component';
+import { TooltipConfigService } from './services/tooltip-config.service';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavService } from './services/sidenav.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,7 @@ import { ForComponent } from './for/for.component';
     VariablesComponent,
     WhileComponent,
     ForComponent,
-    ForComponent
+    SidenavComponent
   ],
     imports: [
         BrowserModule,
@@ -53,9 +58,11 @@ import { ForComponent } from './for/for.component';
         MatTooltipModule,
         MatButtonModule,
         AppRoutingModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatSidenavModule,
+        MatIconModule
     ],
-  providers: [],
+  providers: [TooltipConfigService, SidenavService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
