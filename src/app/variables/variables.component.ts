@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import { TooltipConfigService } from '../services/tooltip-config.service';
+import {TooltipPosition} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-variables',
@@ -53,7 +55,14 @@ export class VariablesComponent implements OnInit {
 
   snackbarConfig: MatSnackBarConfig = new MatSnackBarConfig<any>();
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  showTooltipOnClick: boolean = false;
+  hideDelay: number = 0;
+  position: TooltipPosition = "after";
+
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private tooltipConfigService: TooltipConfigService) {
+    this.tooltipConfigService.showTooltipOnClick$.subscribe(value => this.showTooltipOnClick = value);
+    this.tooltipConfigService.hideDelay$.subscribe(value => this.hideDelay = value);
+    this.tooltipConfigService.position$.subscribe(value => this.position = value);
   }
 
   ngOnInit(): void {

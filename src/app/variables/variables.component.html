@@ -33,22 +33,27 @@
     <div class="container form-table">
       <div class="row border-3 d-flex justify-content-center">
         <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
-        <span
-          matTooltip="Em Portugol, cada variável deve ter seu tipo declarado inicialmente. Escolha um dentre os disponíveis na lista."
-          [matTooltipPosition]="'above'"
-          [matTooltipHideDelay]="2000">Tipo da Variável</span>
+          <span
+            matTooltip="Em Portugol, cada variável deve ter seu tipo declarado inicialmente. Escolha um dentre os disponíveis na lista."
+            [matTooltipPosition]="position" #firstTooltip="matTooltip" [matTooltipHideDelay]="hideDelay"
+            (mouseenter)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (mouseleave)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (click)="showTooltipOnClick ? firstTooltip.toggle() : null">Tipo da Variável</span>
         </div>
         <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
-        <span matTooltip="Digite o nome pelo qual deseja que a variável seja identificada."
-              [matTooltipPosition]="'above'"
-              [matTooltipHideDelay]="2000">Nome da Variável</span>
+          <span matTooltip="Digite o nome pelo qual deseja que a variável seja identificada."
+            [matTooltipPosition]="position" #secondTooltip="matTooltip" [matTooltipHideDelay]="hideDelay"
+            (mouseenter)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (mouseleave)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (click)="showTooltipOnClick ? secondTooltip.toggle() : null">Nome da Variável</span>
         </div>
         <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
-        <span
-          matTooltip="O valor com o qual deseja que sua variável seja iniciada. Mantenha em mente que a variável em Portugol pode ser iniciada sem valor.
-           Se inserir um valor, lembre-se de levar em consideração o tipo dela!"
-          [matTooltipPosition]="'above'"
-          [matTooltipHideDelay]="2000">Valor Inicial da Variável</span>
+          <span matTooltip="O valor com o qual deseja que sua variável seja iniciada. Mantenha em mente que a variável em Portugol pode ser iniciada sem valor.
+           Se inserir um valor, lembre-se de levar em consideração o tipo dela!" [matTooltipPosition]="position"
+            #thirdTooltip="matTooltip" [matTooltipHideDelay]="hideDelay"
+            (mouseenter)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (mouseleave)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (click)="showTooltipOnClick ? thirdTooltip.toggle() : null">Valor Inicial da Variável</span>
         </div>
       </div>
 
@@ -74,7 +79,7 @@
         <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
           <mat-form-field style="text-align: center">
             <input class="form-control" placeholder="Valor Inicial da Variável" matInput type="text"
-                   formControlName="value">
+              formControlName="value">
           </mat-form-field>
         </div>
 
@@ -86,7 +91,9 @@
             Criar variável
           </button>
         </div>
-        <mat-error class="error-text-size text-center" *ngIf="createVariable.invalid && createVariable.get('type')?.touched && createVariable.get('name')?.touched">Todos os valores obrigatórios devem ser
+        <mat-error class="error-text-size text-center"
+          *ngIf="createVariable.invalid && createVariable.get('type')?.touched && createVariable.get('name')?.touched">Todos
+          os valores obrigatórios devem ser
           preenchidos para poder criar a variável.
         </mat-error>
       </div>
@@ -117,7 +124,8 @@
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center p-3">
-      Insira no campo abaixo o valor da sua variável criada anteriormente e clique no botão a seguir para validar se inseriu de fato o valor correto ou não!
+      Insira no campo abaixo o valor da sua variável criada anteriormente e clique no botão a seguir para validar se
+      inseriu de fato o valor correto ou não!
       Caso não tenha inserido valor algum, lembre-se de que o valor padrão é null.
     </div>
   </div>
@@ -127,19 +135,20 @@
         <form (ngSubmit)="submitVariable()">
           <div class="form-group">
             <div class="row">
-              <input type="text" class="form-control" [(ngModel)]="inputVariable" name="inputVariable" placeholder="Insira aqui o valor da variável." />
+              <input type="text" class="form-control" [(ngModel)]="inputVariable" name="inputVariable"
+                placeholder="Insira aqui o valor da variável." />
             </div>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-primary justify-content-center d-flex mt-3 mb-3 align-content-center" style="width: 10%">Enviar</button>
+            <button type="submit" class="btn btn-primary justify-content-center d-flex mt-3 mb-3 align-content-center"
+              style="width: 10%">Enviar</button>
           </div>
         </form>
         <div *ngIf="displayedText" class="mt-3">
-          <p class="fw-bold versalete text-center" [ngClass]="correctValue ? 'correct-value' : 'wrong-value'">{{ displayedText }}</p>
+          <p class="fw-bold versalete text-center" [ngClass]="correctValue ? 'correct-value' : 'wrong-value'">{{
+            displayedText }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-

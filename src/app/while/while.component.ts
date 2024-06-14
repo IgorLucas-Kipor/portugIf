@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, Validators} from "@angular/forms";
+import {TooltipPosition} from "@angular/material/tooltip";
+import { TooltipConfigService } from '../services/tooltip-config.service';
 
 @Component({
   selector: 'app-while',
@@ -51,7 +53,16 @@ export class WhileComponent implements OnInit {
   }
 
   createdWhile: string | undefined;
-  constructor(private fb: FormBuilder) { }
+
+  showTooltipOnClick: boolean = false;
+  hideDelay: number = 0;
+  position: TooltipPosition = "after";
+
+  constructor(private fb: FormBuilder, private tooltipConfigService: TooltipConfigService) {
+    this.tooltipConfigService.showTooltipOnClick$.subscribe(value => this.showTooltipOnClick = value);
+    this.tooltipConfigService.hideDelay$.subscribe(value => this.hideDelay = value);
+    this.tooltipConfigService.position$.subscribe(value => this.position = value);
+   }
 
   ngOnInit(): void {
   }
