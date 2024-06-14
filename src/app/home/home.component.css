@@ -33,14 +33,12 @@
   margin: 20px 0;
 }
 
-/* Estilos CSS para o componente principal ou layout global */
 .page-container {
   position: absolute;
   height: 3vh;
   z-index: 9999;
 }
 
-/* Estilos CSS para o botão ou ícone de abertura/fechamento */
 button {
   position: absolute;
   top: 50%;
