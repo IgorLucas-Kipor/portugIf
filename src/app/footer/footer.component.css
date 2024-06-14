@@ -1,13 +1,16 @@
+* {
+  max-height: 15vh;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #302f49;
-  padding: 40px 80px;
+  padding: 20px 40px;
 }
 
 .footer .copy {
-  color: #fff;
+  color: #000000;
 }
 
 .bottom-links {
@@ -27,7 +30,7 @@
 
 .bottom-links .links span {
   font-size: 20px;
-  color: #fff;
+  color: #000000;
   text-transform: uppercase;
   margin: 10px 0;
 }
@@ -35,5 +38,5 @@
 .bottom-links .links a {
   text-decoration: none;
   color: #a1a1a1;
-  padding: 10px 20px;
+  padding: 2px;
 }
