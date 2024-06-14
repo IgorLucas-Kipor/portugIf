@@ -1,5 +1,4 @@
-<!-- sidenav.component.html -->
-<mat-sidenav-container class="example-container">
+<mat-sidenav-container [ngClass]="{'sidenav-container': isSidenavOpen}">
     <mat-sidenav mode="side" [opened]="isSidenavOpen">
       <mat-radio-group [formControl]="showTooltipOnClick" class="p-3" (change)="configureDelay()">
         <span style="margin-right:3%;">Deseja ativar/desativar tooltip via clique? : </span>

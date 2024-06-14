@@ -1,10 +1,10 @@
 /* Estilos CSS para o componente da sidenav */
 .sidenav-container {
-    height: 100%;
+    margin-left: 1.5rem;
   }
   
   /* Estilos CSS para o botão ou ícone de abertura/fechamento */
   mat-sidenav {
-    width: 300px; /* ou a largura desejada */
+    width: 300px;
   }
   
