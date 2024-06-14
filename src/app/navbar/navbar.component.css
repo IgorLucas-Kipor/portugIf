@@ -20,16 +20,44 @@ body {
   margin-left: 30px;
 }
 
-.nav-items {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #f5f5f5;
-  margin-right: 20px;
+html {
+  scroll-behavior: smooth;
 }
 
-.nav-items a {
+nav {
+  background-color: #f8f9fa;
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  margin-right: 10px;
+}
+
+a {
   text-decoration: none;
-  color: #000;
-  padding: 35px 20px;
+  color: #007bff;
+}
+
+a:hover, a:focus, a:active {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Para garantir que o navbar esteja acima de outros elementos */
+  background-color: #f8f9fa;
+}
+
+section {
+  padding-top: 50px; /* Para garantir que o conteúdo não fique coberto pelo navbar fixo */
+  margin-top: 60px; /* Compensa o navbar fixo */
 }
