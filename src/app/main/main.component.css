@@ -1,0 +1,68 @@
+
+section:nth-of-type(odd) {
+    background-color: #30729b !important;
+    color: white;
+}
+
+section:nth-of-type(even) {
+    background-color: #9b3047 !important;
+    color: white;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: white !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+  background-color: white !important;
+}
+
+::ng-deep .mat-select-arrow {
+  color: white !important;
+}
+
+::ng-deep .mat-select-trigger {
+  color: white !important;
+}
+
+::ng-deep .mat-select-placeholder {
+  color: white !important;
+}
+
+::ng-deep .mat-input-element::placeholder {
+  color: white !important;
+}
+
+::ng-deep .mat-input-element {
+  color: white !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: white !important;
+}
+
+::ng-deep .mat-form-field-outline {
+  border-color: white !important;
+}
+
+::ng-deep input {
+  caret-color: white;
+}
+
+::ng-deep .mat-radio-outer-circle,
+::ng-deep .mat-radio-inner-circle {
+  border-color: white !important;
+  background-color: transparent !important;
+}
+
+::ng-deep .mat-radio-checked .mat-radio-outer-circle,
+::ng-deep .mat-radio-checked .mat-radio-inner-circle {
+  background-color: white !important;
+}
+
+::ng-deep .mat-select-value-text,
+::ng-deep .mat-option-text,
+::ng-deep .mat-select-min-line,
+::ng-deep .mat-select-arrow {
+  color: white !important;
+}
