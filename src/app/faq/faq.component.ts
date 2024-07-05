@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.css']
 })
-export class FaqComponent implements OnInit {
+export class FaqComponent implements AfterContentInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+
+  constructor() {
+
+  }
+
+  ngAfterContentInit(): void {
+    const faqs = document.querySelectorAll(".faq");
+    faqs.forEach(faq => {
+      faq.addEventListener("click", () => {
+        faq.classList.toggle("active");
+      })
+    })
   }
 
 }

@@ -1,35 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body {
-  margin: 0;
-  box-sizing: border-box;
+header {
+  background-color: #309b44;
+  color: white;
+  padding-top: 20px 0;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f5f5f5;
+.logo {
+  position: absolute; /* Posição absoluta para a imagem */
+  left: 20px; /* Ajusta para a esquerda */
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  height: 60px; /* Altura da imagem */
+  width: auto; /* Largura automática para manter proporções */
 }
 
-.header .logo {
-  font-size: 25px;
-  font-family: 'Poppins', sans-serif;
-  color: #000;
-  text-decoration: none;
-  margin-left: 30px;
+.versalete {
+  font-variant: all-small-caps !important;
+  text-transform: lowercase;
+  letter-spacing: 0.5rem;
 }
 
-.nav-items {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #f5f5f5;
+.header-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-transform: uppercase; /* Transforma o texto em maiúsculas */
+}
+
+.header-content h1 .versalete {
+  font-family: 'Times New Roman', Times, serif; /* Fonte com efeito versalete */
+  display: inline-block;
+  position: relative;
+}
+
+.header-content h1 .versalete span {
+  font-size: 0.5em; /* Tamanho da fonte do "IF" menor */
+  position: absolute;
+  top: -0.3em; /* Ajuste fino para posicionamento */
+  left: 2.5em; /* Ajuste fino para posicionamento */
+}
+
+/* Estilos para a navbar */
+nav {
+  background-color: #309b44; /* Fundo verde */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline-block;
   margin-right: 20px;
 }
 
-.nav-items a {
+nav ul li:last-child {
+  margin-right: 0;
+}
+
+nav ul li a {
   text-decoration: none;
-  color: #000;
-  padding: 35px 20px;
+  color: white; /* Texto branco */
+  font-size: 1.2em;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #207a34; /* Cor do texto ao passar o mouse */
+  font-weight: bold; /* Texto em negrito ao passar o mouse */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Efeito sombreado ao passar o mouse */
 }

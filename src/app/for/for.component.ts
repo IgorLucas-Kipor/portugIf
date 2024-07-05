@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { TooltipConfigService } from '../services/tooltip-config.service';
+import { TooltipPosition } from "@angular/material/tooltip";
 
 interface Operadores {
   menor: string;
@@ -34,25 +36,25 @@ export class ForComponent implements OnInit {
     "É importante destacar que embora o desenvolvedor tenha liberdade para estabelecer e modificar esses parâmetros como quiser, é importante seguir regras básicas: por exemplo, se o parâmetro usado na condição de parada nunca for modificado, o for nunca irá terminar, " +
     "resultando no que chamamos de 'loop infinito', algo que trava o código e realiza grandes gastos computacionais desnecessários. É padrão, também, utilizarmos a inicialização como uma espécie de índice das iterações do for, usando-a como parâmetro de parada e alterando seu valor a cada iteração."
 
-  thirdDropdownContent: string = "Além da estrutura tradicional for, existem duas variações implementadas por diferentes linguagens: o 'for in' e o 'for each'. Embora tenham nomes diferentes, ambas tem um funcionamento similar: nessas estruturas, o desenvolvedor " + 
-    "especifica um determinado tipo de parâmetro (numérico, string, booleano ou outros) e define um nome padrão para suas iterações dentro de um conjunto de elementos daquele parâmetro. Ambas as estruturas a seguir acessam cada elemento do conjunto, usando o nome " + 
-    "definido pelo usuário como indicador desses elementos e permitindo a manipulação deles pelo desenvolvedor. Ambas as estruturas são otimizadas para facilitar o uso de for ao longo de conjuntos, mas é importante destacar que, ao menos em sua forma básica, são mais " + 
+  thirdDropdownContent: string = "Além da estrutura tradicional for, existem duas variações implementadas por diferentes linguagens: o 'for in' e o 'for each'. Embora tenham nomes diferentes, ambas tem um funcionamento similar: nessas estruturas, o desenvolvedor " +
+    "especifica um determinado tipo de parâmetro (numérico, string, booleano ou outros) e define um nome padrão para suas iterações dentro de um conjunto de elementos daquele parâmetro. Ambas as estruturas a seguir acessam cada elemento do conjunto, usando o nome " +
+    "definido pelo usuário como indicador desses elementos e permitindo a manipulação deles pelo desenvolvedor. Ambas as estruturas são otimizadas para facilitar o uso de for ao longo de conjuntos, mas é importante destacar que, ao menos em sua forma básica, são mais " +
     "limitadas do que o laço for tradicional. Sendo assim, focaremos aqui no entendimento da versão tradicional do for.";
 
   fourthDropdownContent: string = "Tal como o laço while, uma estrutura de repetição como o laço for requer cautela. Caso a condição de parada ou as alterações dos parâmetros não sejam bem definidos, um 'loop infinito' pode ocorrer, efetivamente quebrando a aplicação. " +
-    "Uma vez que a estrutura for declara de forma mais direta as alterações dos parâmetros, o risco de loop infinito é de forma geral menor do que no laço while, embora o desenvolvedor ainda deva se manter atento à possibilidade. Além disso, um laço for mal elaborado " + 
+    "Uma vez que a estrutura for declara de forma mais direta as alterações dos parâmetros, o risco de loop infinito é de forma geral menor do que no laço while, embora o desenvolvedor ainda deva se manter atento à possibilidade. Além disso, um laço for mal elaborado " +
     "pode ocasionar em múltiplas iterações desnecessárias, gerando altos custos computacionais ao usuário. Assim, torna-se importante analisar o que está sendo feito ao longo do laço para evitar comportamentos desnecessários."
 
   operadores: Operadores = {
-      menor: '<',
-      menorIgual: '<=',
-      igual: '==',
-      maior: '>',
-      maiorIgual: '>=',
-      diferente: '!='
-   };
+    menor: '<',
+    menorIgual: '<=',
+    igual: '==',
+    maior: '>',
+    maiorIgual: '>=',
+    diferente: '!='
+  };
 
-   createFor = this.fb.group({
+  createFor = this.fb.group({
     inicializador: ["indice", Validators.required],
     valorInicializador: [null, Validators.required],
     condicaoParada: [null, Validators.required],
@@ -86,7 +88,16 @@ export class ForComponent implements OnInit {
   }
 
   createdFor: string | undefined;
-  constructor(private fb: FormBuilder) { }
+
+  showTooltipOnClick: boolean = false;
+  hideDelay: number = 0;
+  position: TooltipPosition = "after";
+
+  constructor(private fb: FormBuilder, private tooltipConfigService: TooltipConfigService) {
+    this.tooltipConfigService.showTooltipOnClick$.subscribe(value => this.showTooltipOnClick = value);
+    this.tooltipConfigService.hideDelay$.subscribe(value => this.hideDelay = value);
+    this.tooltipConfigService.position$.subscribe(value => this.position = value);
+  }
 
   ngOnInit(): void {
   }
@@ -99,69 +110,69 @@ export class ForComponent implements OnInit {
   gerarFor() {
     let forString = '';
     const operador = this.getOperadorLogico();
-    forString = 
-    `para ${this.inicializador.value} = ${this.valorInicializador.value}; ${this.inicializador.value} ${operador} ${this.condicaoParadaValor.value}; ${this.inicializador.value}${this.acrescimoDecrescimo.value ? '++' : '--'}
+    forString =
+      `para ${this.inicializador.value} = ${this.valorInicializador.value}; ${this.inicializador.value} ${operador} ${this.condicaoParadaValor.value}; ${this.inicializador.value}${this.acrescimoDecrescimo.value ? '++' : '--'}
           escreva("${this.acao.value}")
       fimpara`
     this.createdFor = forString;
   }
 
-/*   updateValidity() {
-
-    // Verifica se as condições mudaram
-    const initialValues = this.valorInicializador.value;
-    const condition = this.condicaoParada.value;
-    const conditionValue = this.condicaoParadaValor.value;
-    const acrescimoDecrescimo = this.acrescimoDecrescimo.value;
+  /*   updateValidity() {
   
-    if (initialValues != null && condition != null && conditionValue != null) {
-      const errorControls = ['valorInicializador', 'condicaoParada', 'condicaoParadaValor'];
-  
-      errorControls.forEach(controlName => {
-        if (this.createFor.get(controlName)?.hasError('noFor') && this.createFor.get(controlName)?.value) {
-          switch (condition) {
-            case 'maior':
-              if (initialValues > conditionValue) {
-                this.createFor.get(controlName)?.setErrors(null);
-              }
-              break;
-            case 'maiorIgual':
-              if (initialValues >= conditionValue) {
-                this.createFor.get(controlName)?.setErrors(null);
-              }
-              break;
-            case 'menor':
-              if (initialValues < conditionValue) {
-                this.createFor.get(controlName)?.setErrors(null);
-              }
-              break;
-            case 'menorIgual':
-              if (initialValues <= conditionValue) {
-                this.createFor.get(controlName)?.setErrors(null);
-              }
-              break;
-            case 'igual':
-              if (initialValues !== conditionValue) {
-                this.createFor.get(controlName)?.setErrors(null);
-              }
-              break;
-            case 'diferente':
-              if (initialValues == conditionValue) {
-                this.createFor.get(controlName)?.setErrors(null);
-              }
-              break;
-            default:
-              break;
+      // Verifica se as condições mudaram
+      const initialValues = this.valorInicializador.value;
+      const condition = this.condicaoParada.value;
+      const conditionValue = this.condicaoParadaValor.value;
+      const acrescimoDecrescimo = this.acrescimoDecrescimo.value;
+    
+      if (initialValues != null && condition != null && conditionValue != null) {
+        const errorControls = ['valorInicializador', 'condicaoParada', 'condicaoParadaValor'];
+    
+        errorControls.forEach(controlName => {
+          if (this.createFor.get(controlName)?.hasError('noFor') && this.createFor.get(controlName)?.value) {
+            switch (condition) {
+              case 'maior':
+                if (initialValues > conditionValue) {
+                  this.createFor.get(controlName)?.setErrors(null);
+                }
+                break;
+              case 'maiorIgual':
+                if (initialValues >= conditionValue) {
+                  this.createFor.get(controlName)?.setErrors(null);
+                }
+                break;
+              case 'menor':
+                if (initialValues < conditionValue) {
+                  this.createFor.get(controlName)?.setErrors(null);
+                }
+                break;
+              case 'menorIgual':
+                if (initialValues <= conditionValue) {
+                  this.createFor.get(controlName)?.setErrors(null);
+                }
+                break;
+              case 'igual':
+                if (initialValues !== conditionValue) {
+                  this.createFor.get(controlName)?.setErrors(null);
+                }
+                break;
+              case 'diferente':
+                if (initialValues == conditionValue) {
+                  this.createFor.get(controlName)?.setErrors(null);
+                }
+                break;
+              default:
+                break;
+            }
           }
-        }
-      });
-    }
-  } */
+        });
+      }
+    } */
 
 
 }
 
-const numericValidator: ValidatorFn = (control: AbstractControl): {[key: string]: any} | null => {
+const numericValidator: ValidatorFn = (control: AbstractControl): { [key: string]: any } | null => {
   const value = control.value;
   if (isNaN(value)) {
     return { 'numeric': true };
@@ -169,7 +180,7 @@ const numericValidator: ValidatorFn = (control: AbstractControl): {[key: string]
   return null;
 };
 
-const forNuncaIniciadoValidator: any = (formGroup: FormGroup): {[key: string]: any} | null => {
+const forNuncaIniciadoValidator: any = (formGroup: FormGroup): { [key: string]: any } | null => {
   const valorInicializador = formGroup.get('valorInicializador')?.value;
   const condicaoParada = formGroup.get('condicaoParada')?.value;
   const condicaoParadaValor = formGroup.get('condicaoParadaValor')?.value;
@@ -208,7 +219,7 @@ const forNuncaIniciadoValidator: any = (formGroup: FormGroup): {[key: string]: a
   }
 };
 
-const validateLoop: any = (formGroup: FormGroup): {[key: string]: any} | null => {
+const validateLoop: any = (formGroup: FormGroup): { [key: string]: any } | null => {
   const valorInicializador = formGroup.get('valorInicializador')?.value;
   const condicaoParada = formGroup.get('condicaoParada')?.value;
   const condicaoParadaValor = formGroup.get('condicaoParadaValor')?.value;

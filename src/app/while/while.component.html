@@ -34,23 +34,28 @@
     <div class="container form-table">
       <div class="row border-3 d-flex justify-content-center">
         <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
-        <span
-          matTooltip="Estabeleça a condição a ser cumprida para permanência no laço While"
-          [matTooltipPosition]="'above'"
-          [matTooltipHideDelay]="2000">Condição do While</span>
+          <span matTooltip="Estabeleça a condição a ser cumprida para permanência no laço While"
+            [matTooltipPosition]="position" #firstTooltip="matTooltip" [matTooltipHideDelay]="hideDelay"
+            (mouseenter)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (mouseleave)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (click)="showTooltipOnClick ? firstTooltip.toggle() : null">Condição do While</span>
         </div>
         <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
-        <span matTooltip="Defina se o laço While deve ser antecedido de um 'do', ou 'faça'.
+          <span matTooltip="Defina se o laço While deve ser antecedido de um 'do', ou 'faça'.
         Lembre-se que isso significa que o código dentro do While será sempre realizado pelo menos uma vez."
-              [matTooltipPosition]="'above'"
-              [matTooltipHideDelay]="2000">Adicionar "faça" ao While?</span>
+            [matTooltipPosition]="position" #secondTooltip="matTooltip" [matTooltipHideDelay]="hideDelay"
+            (mouseenter)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (mouseleave)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (click)="showTooltipOnClick ? secondTooltip.toggle() : null">Adicionar "faça" ao While?</span>
         </div>
         <div class="col p-2 text-center header-col d-flex align-items-center justify-content-center">
-        <span
-          matTooltip="O que é realizado pelo laço While em cada iteração dele.
+          <span
+            matTooltip="O que é realizado pelo laço While em cada iteração dele.
           Aqui representamos isso por meio de um simples print, mas lembre-se que em um código real, podemos ter estruturas bastante complexas aqui."
-          [matTooltipPosition]="'above'"
-          [matTooltipHideDelay]="2000">Ação realizada pelo While</span>
+            [matTooltipPosition]="position" #thirdTooltip="matTooltip" [matTooltipHideDelay]="hideDelay"
+            (mouseenter)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (mouseleave)="showTooltipOnClick ? $event.stopImmediatePropagation() : null"
+            (click)="showTooltipOnClick ? thirdTooltip.toggle() : null">Ação realizada pelo While</span>
         </div>
       </div>
 
@@ -63,18 +68,19 @@
         </div>
 
         <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
-            <mat-radio-group [formControl]="do">
-                <mat-radio-button class="p-1" [value]="true">Sim</mat-radio-button>
-                <mat-radio-button class="p-1" [value]="false">Não</mat-radio-button>
-            </mat-radio-group>
-            <mat-error *ngIf="createWhile.get('do')?.invalid">Deve ser definido se while terá ou não o 'faça'</mat-error>
+          <mat-radio-group [formControl]="do">
+            <mat-radio-button class="p-1" [value]="true">Sim</mat-radio-button>
+            <mat-radio-button class="p-1" [value]="false">Não</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="createWhile.get('do')?.invalid">Deve ser definido se while terá ou não o 'faça'</mat-error>
         </div>
 
         <div class="col selection-col p-3 d-flex align-items-center justify-content-center">
           <mat-form-field style="text-align: center">
             <input class="form-control" placeholder="Ação realizada pelo while" matInput type="text"
-                   [formControl]="action">
-            <mat-error *ngIf="createWhile.get('action')?.invalid">É obrigatório especificar a ação que o while realiza</mat-error>
+              [formControl]="action">
+            <mat-error *ngIf="createWhile.get('action')?.invalid">É obrigatório especificar a ação que o while
+              realiza</mat-error>
           </mat-form-field>
         </div>
 
@@ -86,7 +92,9 @@
             Criar while
           </button>
         </div>
-        <mat-error class="error-text-size text-center" *ngIf="createWhile.invalid && createWhile.get('condition')?.touched && createWhile.get('action')?.touched">Todos os valores obrigatórios devem ser
+        <mat-error class="error-text-size text-center"
+          *ngIf="createWhile.invalid && createWhile.get('condition')?.touched && createWhile.get('action')?.touched">Todos
+          os valores obrigatórios devem ser
           preenchidos para poder criar o laço while.
         </mat-error>
       </div>
@@ -104,10 +112,9 @@
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center p-3">
-    <pre>
+      <pre>
       <code [innerHTML]="createdWhile"></code>
     </pre>
     </div>
   </div>
 </div>
-
