@@ -9,17 +9,17 @@
   border-spacing: 5px;
 }
 
-.header-col {
-  background-color: #30729b;
-}
+/*.header-col {*/
+/*  background-color: #30729b;*/
+/*}*/
 
-.selection-col {
-  background-color: #309b84;
-}
+/*.selection-col {*/
+/*  background-color: #309b84;*/
+/*}*/
 
-.button-row {
-  background-color: #309b84;
-}
+/*.button-row {*/
+/*  background-color: #309b84;*/
+/*}*/
 
 .mat-text {
   font-size: 18px !important;

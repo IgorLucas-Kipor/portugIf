@@ -66,3 +66,8 @@ section:nth-of-type(even) {
 ::ng-deep .mat-select-arrow {
   color: white !important;
 }
+
+::ng-deep .mat-select-panel .mat-option {
+  background-color: black !important;
+  color: white !important;
+}
