@@ -4,7 +4,7 @@
 }
 
 * {
-  overflow-x: hidden !important;
+  overflow: hidden !important;
 }
 
 ::ng-deep .mat-drawer-inner-container {
@@ -17,6 +17,22 @@ mat-sidenav {
 
 .mat-radio-group, .mat-form-field, button {
   color: #ffffff;
+}
+
+.btn-color {
+  background-color: #9b3047 !important;
+}
+
+.container-btn {
+  width: 100%; /* ou qualquer outra largura desejada */
+  text-align: center; /* garante que o contêiner centralize seu conteúdo */
+}
+
+.centered-block {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 

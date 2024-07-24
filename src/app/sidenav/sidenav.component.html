@@ -20,7 +20,9 @@
              [formControl]="hideDelay" [value]="hideDelay.value">
     </mat-form-field>
     <br><br>
-    <button mat-button (click)="applySettings()">Aplicar Configurações</button>
+    <div class="container-btn">
+      <button mat-button class="btn-color centered-block" (click)="applySettings()">Aplicar Configurações</button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <ng-content></ng-content>

@@ -71,3 +71,11 @@ section:nth-of-type(even) {
   background-color: black !important;
   color: white !important;
 }
+
+::ng-deep .mat-form-field input {
+  color: white;
+}
+
+::ng-deep .mat-form-field input:focus {
+  color: black !important;
+}

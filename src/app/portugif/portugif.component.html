@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="text-center col-12">
+    <h1 class="display-4 versalete">Laço If</h1>
+  </div>
+
 <form [formGroup]="textToCodeOutput" (submit)="translateCode()" class="pt-3 pb-3">
 
   <br><br>
@@ -253,10 +258,18 @@
       </div>
       <div class="d-flex justify-content-center" *ngIf="this.generatedCode">
         <span [matTooltip]="this.generatedCode ? 'A sua consequência é o que ocorre caso a sua condição seja verdadeira, ou seja, caso o que você determinou como condição de fato aconteça. Aqui apenas imprimimos o texto do que deveria acontecer,' +
-       ' mas em um código real, cabe a você, como programador, codificar o que será feito caso a condição se realize..' : ''"
-              [matTooltipPosition]="'right'">
+       ' mas em um código real, cabe a você, como programador, codificar o que será feito caso a condição se realize.' : ''"
+              [matTooltipPosition]="'right'"
+              [matTooltipClass]="['mat-text']">
           <pre style="margin: 0; padding: 0;">
             <code [innerHTML]="printTranslatedCode"></code>
+          </pre>
+        </span>
+      </div>
+      <div class="d-flex justify-content-center" *ngIf="this.generatedCode">
+        <span>
+          <pre style="margin: 0; padding: 0;">
+            <code [innerHTML]="closeCode"></code>
           </pre>
         </span>
       </div>
