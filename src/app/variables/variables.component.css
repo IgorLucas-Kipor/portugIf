@@ -1,7 +1,7 @@
 .correct-value {
-  color: darkgreen;
+  color: #19f319;
 }
 
 .wrong-value {
-  color: darkred;
+  color: #f80606;
 }
