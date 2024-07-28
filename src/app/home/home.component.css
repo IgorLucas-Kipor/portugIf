@@ -36,7 +36,7 @@
 .page-container {
   position: absolute;
   height: 3vh;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 button {
@@ -45,4 +45,6 @@ button {
   left: 0;
   transform: translateY(-50%);
 }
+
+
 
