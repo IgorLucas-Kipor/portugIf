@@ -12,6 +12,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -62,7 +63,7 @@ import { SidenavService } from './services/sidenav.service';
         MatSidenavModule,
         MatIconModule
     ],
-  providers: [TooltipConfigService, SidenavService],
+  providers: [TooltipConfigService, SidenavService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
